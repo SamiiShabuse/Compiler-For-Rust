@@ -24,4 +24,13 @@ impl Tokenizer {
         self.cached_token.as_ref()
     }
 
+        pub fn next_token(&mut self) -> Option<Token> {
+        if let Some(token) = self.cached_token.take() {
+            return Some(token);
+        }
+
+        // Tokenization logic goes here
+        None
+    }
+
 }
