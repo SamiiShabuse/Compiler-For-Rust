@@ -27,7 +27,7 @@ pub enum Token {
     IDENTIFIER(String),
 }
 
-imp Token {
+impl Token {
     pub fn token_type(&self) -> TokenType {
         match self {
             Token::LEFT_PAREN => TokenType::LEFT_PAREN,
