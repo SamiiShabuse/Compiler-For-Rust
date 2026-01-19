@@ -22,9 +22,9 @@ pub enum Token {
     EOF,
 
     // Tokens with data
-    OPERATOR,
-    NUMBER,
-    IDENTIFIER,
+    OPERATOR(char),
+    NUMBER(i64), // idk if this needs to be float or int yet
+    IDENTIFIER(String),
 }
 
 imp Token {
