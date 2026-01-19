@@ -1,3 +1,6 @@
+use compiler_for_rust::token::Token;
+use compiler_for_rust::tokenizer::Tokenizer;
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
@@ -26,16 +29,21 @@ fn main() {
             let mut t= tok;
             loop {
                 let p = t.peek();
-                if p.token_type == TokenType::EOF {
+                if let Some(token) = p {
+                    if matches!(token, Token::Eof) {
+                        break;
+                    }
+                    println!("{:?}", t.next_token());
+                } else {
                     break;
                 }
-                println!("{:?}", t.next());
             }
         }
         "parseExpr" => {
-            let mut p= Parser::new(tok);
-            let expr = p.parse_expr();
-            println!("{:?}", expr);
+            // let mut p= Parser::new(tok);
+            // let expr = p.parse_expr();
+            // println!("{:?}", expr);
+            println!("Parser not implemented yet");
         }
         _ => {
             eprintln!("Unknown subcommand: {}", sub);
