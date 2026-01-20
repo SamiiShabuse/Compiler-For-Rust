@@ -1,3 +1,4 @@
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Token {
     // Fixed Punctuations
     LeftParen,
