@@ -1,3 +1,11 @@
+# 1/19/2026
+- Today worked on teh tokenizer I think I finished it.
+- I just made a couple of test cases to make sure it works
+- Ngl I am not liking this language already I have to import PartialEq and Eq just to compare enums smh like cmon bro
+
+# 1/18/2026
+- Today worked on learning more about rust programming language
+
 # 1/17/2026
 - today going to work more on mimicing what profressor did in his Java jawn
 - started some of the tokenizer stuff
