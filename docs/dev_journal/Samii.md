@@ -1,3 +1,11 @@
+# 1/23/2026
+- Today is the day we learn how to code with RUST
+- I will be jotting down notes from this [video](https://www.youtube.com/watch?v=rQ_J9WH6CGk) on Notion 
+- I watched 30 minutes got the jist found this doc way better [doc](https://learnxinyminutes.com/rust/)
+
+# 1/20/2026 - 1/22/2026
+- Took a break my math classes were intense!
+
 # 1/19/2026
 - Today worked on teh tokenizer I think I finished it.
 - I just made a couple of test cases to make sure it works
