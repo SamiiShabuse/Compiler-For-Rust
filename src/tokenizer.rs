@@ -88,6 +88,11 @@ impl Tokenizer {
                 Token::Comma
             }
 
+            '=' => {
+                self.current += 1;
+                Token::Equal
+            }
+
             '+' | '-' | '*' | '/' | '%' => {
                 self.current += 1;
                 Token::Operator(ch)

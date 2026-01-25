@@ -12,6 +12,7 @@ pub enum Token {
     Dot,
     Colon,
     Comma,
+    Equal,
 
     // Keywords
     This,
@@ -51,6 +52,7 @@ impl Token {
             Token::Operator(_) => "Operator",
             Token::Number(_) => "Number",
             Token::Identifier(_) => "Identifier",
+            Token::Equal => "Equal",
         }
     }
 }
