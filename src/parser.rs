@@ -1,3 +1,4 @@
+use core::panic;
 use crate::token::Token;
 use crate::tokenizer::Tokenizer;
 use crate::statment::Statement;
@@ -47,6 +48,27 @@ impl Parser{
                 }
                 Statement::Print(expr)
             }
+
+            Token::Identifier(name) => {
+                match self.tokenizer.next_token() {
+                    Token::Equal => {}
+                    other => panic!("Expected '=' after identifier but found {:?}", other),
+                }
+                let rhs = self.parse_expression();
+                if name == "_" {
+                    return Statement::Discard(rhs);
+                } else {
+                    Statement::Assignment { name, value: rhs }
+                }
+            }
+
+            Token::Return => {
+                let expr = self.parse_expression();
+                Statement::Return(expr)
+            }
+
+            Token::Eof => panic!("Unexpected EOF"),
+
             other => {
                 panic!("Unexpected token while parsing statement: {:?}", other) 
                 }

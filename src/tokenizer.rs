@@ -109,10 +109,10 @@ impl Tokenizer {
 
                     let value = s.parse::<i64>().unwrap();
                     Token::Number(value)
-                } else if ch.is_ascii_alphabetic() {
+                } else if ch.is_ascii_alphabetic() || ch == '_' {
                     let start = self.current;
                     self.current += 1;
-                    while self.current < self.text.len() && self.text[self.current].is_ascii_alphanumeric() {
+                    while self.current < self.text.len() && (self.text[self.current].is_ascii_alphanumeric() || self.text[self.current] == '_') {
                         self.current += 1;
                     }
                     let frag: String = self.text[start..self.current].iter().collect();
