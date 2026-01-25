@@ -16,11 +16,11 @@ impl Tokenizer {
         }
     }
 
-    pub fn peek(&mut self) -> Option<&Token> {
+    pub fn peek(&mut self) -> Token {
         if self.cached_token.is_none() {
             self.cached_token = Some(self.next_token());
         }
-        self.cached_token.as_ref()
+        self.cached_token.as_ref().unwrap().clone()
     }
 
     pub fn next_token(&mut self) -> Token {
