@@ -69,10 +69,33 @@ impl Parser{
 
             Token::Eof => panic!("Unexpected EOF"),
 
+            Token::Not =>  {
+                let object = self.parse_expression();
+                
+                match self.tokenizer.next_token() {
+                    Token::Dot => {}
+                    other => panic!("Expected '.' after 'not' but found {:?}", other),
+                }
+
+                let field = match self.tokenizer.next_token() {
+                    Token::Identifier(field) => field,
+                    other => panic!("Expected field name after 'not.' but found {:?}", other),
+                };
+
+                match self.tokenizer.next_token() {
+                    Token::Equal => {}
+                    other => panic!("Expected '=' after '!e.f' but found {:?}", other),
+                }
+                let value = self.parse_expression();
+                Statement::FieldWrite { object, field, value }
+            }
+
             other => {
                 panic!("Unexpected token while parsing statement: {:?}", other) 
                 }
             }
+
+            
         }
 
     pub fn parse_expression(&mut self) -> Expr {
