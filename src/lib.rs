@@ -1,6 +1,7 @@
 pub mod token;
 pub mod tokenizer;
 pub mod parser;
+pub mod statment;
 
 
 pub fn validate_args(args: &[String]) -> Result<(), String> {

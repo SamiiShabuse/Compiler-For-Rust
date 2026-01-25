@@ -1,5 +1,5 @@
 use compiler_for_rust::parser::Parser;
-use compiler_for_rust::token::{self, Token};
+use compiler_for_rust::token::Token;
 use compiler_for_rust::tokenizer::Tokenizer;
 
 fn main() {
@@ -40,6 +40,11 @@ fn main() {
             let mut parser = Parser::new(tok);
             let expr = parser.parse_expression();
             println!("Parsed expression: {:?}", expr);  
+        }
+        "parseStmt" => {
+            let mut parser = Parser::new(tok);
+            let statement = parser.parse_statement();
+            println!("Parsed statement: {:?}", statement);  
         }
         _ => {
             eprintln!("Unknown subcommand: {}", sub);

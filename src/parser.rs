@@ -1,5 +1,6 @@
 use crate::token::Token;
 use crate::tokenizer::Tokenizer;
+use crate::statment::Statement;
 
 #[derive(Debug)]
 pub enum Expr{
@@ -31,6 +32,26 @@ impl Parser{
     pub fn new(tokenizer: Tokenizer) -> Self{
         Self { tokenizer }
     }
+
+    pub fn parse_statement(&mut self) -> Statement {
+        match self.tokenizer.next_token() {
+            Token::Print => {
+                match self.tokenizer.next_token() {
+                    Token::LeftParen => {}
+                    other => panic!("Expected '(' after 'print' but found {:?}", other),
+                }
+                let expr = self.parse_expression();
+                match self.tokenizer.next_token() {
+                    Token::RightParen => {}
+                    other => panic!("Expected ')' after expression but found {:?}", other),
+                }
+                Statement::Print(expr)
+            }
+            other => {
+                panic!("Unexpected token while parsing statement: {:?}", other) 
+                }
+            }
+        }
 
     pub fn parse_expression(&mut self) -> Expr {
         match self.tokenizer.next_token() {
@@ -114,6 +135,7 @@ impl Parser{
             }
 
             Token::This => Expr::This,
+            
 
             other => panic!("Unexpected token while parsing expression: {:?}", other),
         }
