@@ -12,4 +12,9 @@ pub enum Statement {
         field: String,
         value: Expr,
     },
+
+    IfOnly {
+        condition: Expr,
+        body: Vec<Statement>,
+    },
 }

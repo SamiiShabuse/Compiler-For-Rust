@@ -34,6 +34,29 @@ impl Parser{
         Self { tokenizer }
     }
 
+    pub fn expect(&mut self, want: Token) {
+        let got = self.tokenizer.next_token();
+        if got != want {
+            panic!("Expected token {:?} but got {:?}", want, got);
+        }
+    }
+
+    fn parse_block(&mut self) -> Vec<Statement> {
+        // used to sexpect { stmtements... }
+        self.expect(Token::LeftBrace);
+        
+        let mut body = Vec::new();
+
+        // keep parsing statements until hittting }
+        while self.tokenizer.peek() != Token::RightBrace {
+            let statment = self.parse_statement();
+            body.push(statment);
+        }
+
+        self.expect(Token::RightBrace);
+        body
+    }
+
     pub fn parse_statement(&mut self) -> Statement {
         match self.tokenizer.next_token() {
             Token::Print => {
@@ -86,8 +109,23 @@ impl Parser{
                     Token::Equal => {}
                     other => panic!("Expected '=' after '!e.f' but found {:?}", other),
                 }
+
                 let value = self.parse_expression();
+
                 Statement::FieldWrite { object, field, value }
+            }
+
+            Token::IfOnly => {
+                let condition = self.parse_expression();
+
+                match self.tokenizer.next_token() {
+                    Token::Colon => {}
+                    other => panic!("Expected ':' after 'ifonly' condition but found {:?}", other),
+                }
+
+                let body = self.parse_block();
+
+                Statement::IfOnly { condition, body }
             }
 
             other => {
