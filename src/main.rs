@@ -29,7 +29,7 @@ fn main() {
         "tokenize" => {
             let mut tokenizer = tok;
             loop {
-                let p = tokenizer.peek();
+                let p = tokenizer.next_token();
                 if p == Token::Eof {
                     break;
                 }
