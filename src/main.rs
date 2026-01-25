@@ -1,4 +1,5 @@
-use compiler_for_rust::token::Token;
+use compiler_for_rust::parser::Parser;
+use compiler_for_rust::token::{self, Token};
 use compiler_for_rust::tokenizer::Tokenizer;
 
 fn main() {
@@ -26,24 +27,19 @@ fn main() {
 
     match sub.as_str() {
         "tokenize" => {
-            let mut t= tok;
+            let mut tokenizer = tok;
             loop {
-                let p = t.peek();
-                if let Some(token) = p {
-                    if matches!(token, Token::Eof) {
-                        break;
-                    }
-                    println!("{:?}", t.next_token());
-                } else {
+                let p = tokenizer.peek();
+                if p == Token::Eof {
                     break;
                 }
+                println!("{:?}", p);
             }
         }
         "parseExpr" => {
-            // let mut p= Parser::new(tok);
-            // let expr = p.parse_expr();
-            // println!("{:?}", expr);
-            println!("Parser not implemented yet");
+            let mut parser = Parser::new(tok);
+            let expr = parser.parse_expression();
+            println!("Parsed expression: {:?}", expr);  
         }
         _ => {
             eprintln!("Unknown subcommand: {}", sub);
