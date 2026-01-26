@@ -1,7 +1,7 @@
 use core::panic;
 use crate::token::Token;
 use crate::tokenizer::Tokenizer;
-use crate::statment::Statement;
+use crate::statement::Statement;
 
 #[derive(Debug)]
 pub enum Expr{
@@ -160,7 +160,7 @@ impl Parser{
 
                 Statement::While { condition, body }
             }
-            
+
             other => {
                 panic!("Unexpected token while parsing statement: {:?}", other) 
             }

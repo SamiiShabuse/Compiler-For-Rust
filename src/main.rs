@@ -1,6 +1,7 @@
 use compiler_for_rust::parser::Parser;
 use compiler_for_rust::token::Token;
 use compiler_for_rust::tokenizer::Tokenizer;
+use compiler_for_rust::lower;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -46,6 +47,14 @@ fn main() {
             let statement = parser.parse_statement();
             println!("Parsed statement: {:?}", statement);  
         }
+        
+        "lowerMain" => {
+            let mut parser = Parser::new(tok);
+            let statements = parser.parse_statement();
+            let program_ir = lower::lower_main(&[statements]);
+            println!("Lowered Program IR: {:?}", program_ir);
+        }
+
         _ => {
             eprintln!("Unknown subcommand: {}", sub);
             std::process::exit(1);
