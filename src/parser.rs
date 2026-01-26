@@ -148,6 +148,19 @@ impl Parser{
                 Statement::If { condition, then_body, else_body  }
             }
 
+            Token::While => {
+                let condition = self.parse_expression();
+
+                match self.tokenizer.next_token() {
+                    Token::Colon => {}
+                    other => panic!("Expected ':' after 'while' condition but found {:?}", other),
+                }
+
+                let body = self.parse_block();
+
+                Statement::While { condition, body }
+            }
+            
             other => {
                 panic!("Unexpected token while parsing statement: {:?}", other) 
             }

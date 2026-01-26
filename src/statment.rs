@@ -23,4 +23,9 @@ pub enum Statement {
         then_body: Vec<Statement>,
         else_body: Vec<Statement>,
     },
+
+    While {
+        condition: Expr,
+        body: Vec<Statement>,
+    },
 }
