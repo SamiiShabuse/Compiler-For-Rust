@@ -124,6 +124,7 @@ impl Tokenizer {
                         "while" => Token::While,
                         "return" => Token::Return,
                         "print" => Token::Print,
+                        "else" => Token::Else,
                         _ => Token::Identifier(frag),
                     }
                 } else {

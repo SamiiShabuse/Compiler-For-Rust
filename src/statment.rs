@@ -17,4 +17,10 @@ pub enum Statement {
         condition: Expr,
         body: Vec<Statement>,
     },
+
+    If {
+        condition: Expr,
+        then_body: Vec<Statement>,
+        else_body: Vec<Statement>,
+    },
 }

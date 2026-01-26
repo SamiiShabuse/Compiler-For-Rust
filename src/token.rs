@@ -16,6 +16,7 @@ pub enum Token {
 
     // Keywords
     This,
+    Else,
     If,
     IfOnly,
     While,
@@ -45,6 +46,7 @@ impl Token {
             Token::This => "This",
             Token::If => "If",
             Token::IfOnly => "IfOnly",
+            Token::Else => "Else",
             Token::While => "While",
             Token::Return => "Return",
             Token::Print => "Print",

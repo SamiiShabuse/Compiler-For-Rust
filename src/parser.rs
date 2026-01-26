@@ -128,13 +128,33 @@ impl Parser{
                 Statement::IfOnly { condition, body }
             }
 
-            other => {
-                panic!("Unexpected token while parsing statement: {:?}", other) 
+            Token::If => {
+                let condition = self.parse_expression();
+
+                match self.tokenizer.next_token() {
+                    Token::Colon => {}
+                    other => panic!("Expected ':' after 'if' condition but found {:?}", other),
                 }
+
+                let then_body = self.parse_block();
+
+                match self.tokenizer.next_token() {
+                    Token::Else => {}
+                    other => panic!("Expected 'else' after 'if' condition but found {:?}", other),
+                }
+
+                let else_body = self.parse_block();
+
+                Statement::If { condition, then_body, else_body  }
             }
 
-            
+            other => {
+                panic!("Unexpected token while parsing statement: {:?}", other) 
+            }
         }
+
+            
+    }
 
     pub fn parse_expression(&mut self) -> Expr {
         match self.tokenizer.next_token() {
