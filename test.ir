@@ -1,0 +1,6 @@
+data:
+code:
+main:
+entry:
+  print 1
+  return 0
