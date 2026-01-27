@@ -10,11 +10,13 @@ pub fn fmt_rvalue(v: &RValue) -> String {
     }
 }
 
-pub fn fmt_prim(p: &Prim) -> String {
+pub fn fmt_prim(p: &Primitive) -> String {
     match p {
-        Prim::PrintRValue(v) => format!("print {}", fmt_rvalue(v)),
-        Prim::Assign { dst, src } => format!("{} = {}", dst, fmt_rvalue(src)),      
+        Primitive::PrintRValue(v) => format!("print {}", fmt_rvalue(v)),
+        Primitive::Assign { dst, src } => format!("{} = {}", dst, fmt_rvalue(src)),      
+        Primitive::BinOp { dst, lhs, op, rhs } => format!("{} = {} {} {}", dst, fmt_rvalue(lhs), op, fmt_rvalue(rhs)),
     }
+    
 }
 
 pub fn fmt_term(t: &Term) -> String {

@@ -56,6 +56,22 @@ fn main() {
             println!("{}", ir_print::print_program(&program_ir));
         }
 
+        "lowerMain2" => {
+            let mut parser = Parser::new(tok);
+
+            let statement1 = parser.parse_statement();
+            let mut stmts = vec![statement1];
+
+            // parse a second statement if exists
+            if parser.peek_token() != Token::Eof {
+                let statement2 = parser.parse_statement();
+                stmts.push(statement2);
+            }
+
+            let prog = lower::lower_main(&stmts);
+            print!("{}", ir_print::print_program(&prog));
+        }
+
         _ => {
             eprintln!("Unknown subcommand: {}", sub);
             std::process::exit(1);

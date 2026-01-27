@@ -41,6 +41,11 @@ impl Parser{
         }
     }
 
+    pub fn peek_token(&mut self) -> Token {
+        self.tokenizer.peek()
+    }
+
+
     fn parse_block(&mut self) -> Vec<Statement> {
         // used to sexpect { stmtements... }
         self.expect(Token::LeftBrace);

@@ -13,9 +13,10 @@ pub enum LValue {
 }
 
 #[derive(Debug, Clone)]
-pub enum Prim {
+pub enum Primitive {
     PrintRValue(RValue),
     Assign { dst:  String, src: RValue },
+    BinOp { dst: String, lhs: RValue, op: char,  rhs: RValue }, // op is e.g. +, -, *, /
 }
 
 #[derive(Debug, Clone)]
@@ -29,7 +30,7 @@ pub enum Term {
 #[derive(Debug, Clone)]
 pub struct Block {
     pub label: String,
-    pub prims: Vec<Prim>,
+    pub prims: Vec<Primitive>,
     pub terms: Term,
 }
 
