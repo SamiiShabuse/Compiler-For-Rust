@@ -1,5 +1,7 @@
 use crate::ir::*;
 
+// fmt = format
+
 pub fn fmt_rvalue(v: &RValue) -> String {
     match v {
         RValue::Immediate(i) => i.to_string(),
