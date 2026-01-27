@@ -28,11 +28,11 @@ pub fn fmt_term(t: &Term) -> String {
 
 pub fn print_program(p: &ProgramIR) -> String{
     let mut out = String::new();
-    out.push_str("Data:\n");
+    out.push_str("data:\n");
     for d in &p.data {
         out.push_str(&format!("  {}\n", d));
     }
-    out.push_str("Code:\n");
+    out.push_str("code:\n\n");
 
     for b in &p.blocks {
         out.push_str(&format!("{}:\n", b.label));

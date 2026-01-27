@@ -1,6 +1,7 @@
 use compiler_for_rust::parser::Parser;
 use compiler_for_rust::token::Token;
 use compiler_for_rust::tokenizer::Tokenizer;
+use compiler_for_rust::ir_print;
 use compiler_for_rust::lower;
 
 fn main() {
@@ -52,7 +53,7 @@ fn main() {
             let mut parser = Parser::new(tok);
             let statements = parser.parse_statement();
             let program_ir = lower::lower_main(&[statements]);
-            println!("Lowered Program IR: {:?}", program_ir);
+            println!("{}", ir_print::print_program(&program_ir));
         }
 
         _ => {
