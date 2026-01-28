@@ -1,4 +1,24 @@
-use crate::parser::Expr;
+#[derive(Debug, Clone)]
+pub enum Expr {
+    This,
+    Constant(i64),
+    Variable(String),
+    BinaryOp {
+        left: Box<Expr>,
+        op: char,
+        right: Box<Expr>,
+    },
+    MethodCall {
+        object: Box<Expr>,
+        method: String,
+        arguments: Vec<Expr>,
+    },
+    FieldRead {
+        object: Box<Expr>,
+        field: String,
+    },
+    ClassReference(String),
+}
 
 #[derive(Debug)]
 pub enum Statement {

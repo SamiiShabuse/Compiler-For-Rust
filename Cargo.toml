@@ -1,6 +1,14 @@
-[package]
-name = "compiler-for-rust"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = [
+    "crates/compiler-common",
+    "crates/compiler-frontend",
+    "crates/compiler-ir",
+    "crates/compiler-backend",
+    "crates/compiler-cli",
+]
+resolver = "2"
 
-[dependencies]
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Samii"]

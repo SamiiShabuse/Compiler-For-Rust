@@ -1,5 +1,5 @@
-use compiler_for_rust::tokenizer::Tokenizer;
-use compiler_for_rust::token::Token;
+use compiler_frontend::Tokenizer;
+use compiler_common::Token;
 
 #[test]
 fn test_tokenizer_simple_expression() {

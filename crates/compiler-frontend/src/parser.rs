@@ -1,29 +1,7 @@
 use core::panic;
-use crate::token::Token;
+use compiler_common::token::Token;
+use compiler_common::statement::{Statement, Expr};
 use crate::tokenizer::Tokenizer;
-use crate::statement::Statement;
-
-#[derive(Debug)]
-pub enum Expr{
-    This,
-    Constant(i64),
-    Variable(String),
-    BinaryOp{
-        left: Box<Expr>,
-        op: char,
-        right: Box<Expr>,
-    },
-    MethodCall{
-        object: Box<Expr>,
-        method: String,
-        arguments: Vec<Expr>,
-    },
-    FieldRead{
-        object: Box<Expr>,
-        field: String,
-    },
-    ClassReference(String),
-}
 
 pub struct Parser{
     tokenizer: Tokenizer,

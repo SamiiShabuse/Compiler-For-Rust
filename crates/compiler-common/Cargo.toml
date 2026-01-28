@@ -1,0 +1,9 @@
+[package]
+name = "compiler-common"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[lib]
+
+[dependencies]

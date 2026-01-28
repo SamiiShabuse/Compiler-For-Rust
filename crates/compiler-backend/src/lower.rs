@@ -1,6 +1,5 @@
-use crate::ir::*;
-use crate::statement::Statement;
-use crate::parser::Expr;
+use compiler_ir::*;
+use compiler_common::{statement::Statement, statement::Expr};
 
 pub fn lower_main(stmts: &[Statement]) -> ProgramIR {
     let mut prims = Vec::new();
@@ -30,7 +29,7 @@ pub fn lower_main(stmts: &[Statement]) -> ProgramIR {
                 };
             }
 
-            // TODO: for now allow discard only if it’s a pure expression we can lower.
+            // TODO: for now allow discard only if it's a pure expression we can lower.
             // fix later because of side effects
             Statement::Discard(e) => {
                 let _ = lower_expression(e, &mut prims, &mut temps);

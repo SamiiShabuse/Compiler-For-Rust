@@ -1,0 +1,10 @@
+[package]
+name = "compiler-frontend"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[lib]
+
+[dependencies]
+compiler-common = { path = "../compiler-common" }

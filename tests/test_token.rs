@@ -1,4 +1,4 @@
-use compiler_for_rust::token::Token;
+use compiler_common::Token;
 
 #[test]
 fn test_type_fixed_punctuations() {

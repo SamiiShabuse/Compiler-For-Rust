@@ -1,13 +1,18 @@
-use compiler_for_rust::parser::Parser;
-use compiler_for_rust::token::Token;
-use compiler_for_rust::tokenizer::Tokenizer;
-use compiler_for_rust::ir_print;
-use compiler_for_rust::lower;
+use compiler_frontend::{Parser, Token, Tokenizer};
+use compiler_ir::print_program;
+use compiler_backend::lower_main;
+
+fn validate_args(args: &[String]) -> Result<(), String> {
+    if args.len() < 2 {
+        return Err("Usage: <comp> {tokenize|parseExpr|parseStmt|lowerMain|lowerMain2} [args..]".to_string());
+    }
+    Ok(()) 
+}
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    if let Err(err) = compiler_for_rust::validate_args(&args) {
+    if let Err(err) = validate_args(&args) {
         eprintln!("{}", err);
         std::process::exit(1);
     }
@@ -52,8 +57,8 @@ fn main() {
         "lowerMain" => {
             let mut parser = Parser::new(tok);
             let statements = parser.parse_statement();
-            let program_ir = lower::lower_main(&[statements]);
-            println!("{}", ir_print::print_program(&program_ir));
+            let program_ir = lower_main(&[statements]);
+            println!("{}", print_program(&program_ir));
         }
 
         "lowerMain2" => {
@@ -68,8 +73,8 @@ fn main() {
                 stmts.push(statement2);
             }
 
-            let prog = lower::lower_main(&stmts);
-            print!("{}", ir_print::print_program(&prog));
+            let prog = lower_main(&stmts);
+            print!("{}", print_program(&prog));
         }
 
         _ => {
@@ -78,4 +83,3 @@ fn main() {
         }
     }
 }
-

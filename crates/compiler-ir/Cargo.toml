@@ -1,0 +1,11 @@
+[package]
+name = "compiler-ir"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[lib]
+
+[dependencies]
+compiler-common = { path = "../compiler-common" }
+compiler-frontend = { path = "../compiler-frontend" }

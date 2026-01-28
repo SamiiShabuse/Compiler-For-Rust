@@ -3,5 +3,39 @@
 version = 4
 
 [[package]]
-name = "compiler-for-rust"
+name = "compiler-backend"
 version = "0.1.0"
+dependencies = [
+ "compiler-common",
+ "compiler-frontend",
+ "compiler-ir",
+]
+
+[[package]]
+name = "compiler-cli"
+version = "0.1.0"
+dependencies = [
+ "compiler-backend",
+ "compiler-common",
+ "compiler-frontend",
+ "compiler-ir",
+]
+
+[[package]]
+name = "compiler-common"
+version = "0.1.0"
+
+[[package]]
+name = "compiler-frontend"
+version = "0.1.0"
+dependencies = [
+ "compiler-common",
+]
+
+[[package]]
+name = "compiler-ir"
+version = "0.1.0"
+dependencies = [
+ "compiler-common",
+ "compiler-frontend",
+]

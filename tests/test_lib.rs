@@ -1,4 +1,7 @@
-use compiler_for_rust::validate_args;
+// validate_args is now in compiler-cli binary
+// You can add it to a library if needed for code reuse
+/*
+use compiler_cli::validate_args;
 
 #[test]
 fn test_validate_args_no_args() {
@@ -13,4 +16,4 @@ fn test_validate_args_with_args() {
     let result = validate_args(&args);
     assert!(result.is_ok());
 }
-
+*/

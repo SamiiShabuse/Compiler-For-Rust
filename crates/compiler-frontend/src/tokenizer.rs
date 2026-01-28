@@ -1,4 +1,4 @@
-use crate::token::Token;
+use crate::Token;
 
 pub struct Tokenizer {
     text: Vec<char>,
@@ -133,5 +133,4 @@ impl Tokenizer {
             }
         }
     }
-
 }
