@@ -1,47 +1,78 @@
-# Compiler-For-Rust
-This Is The Compiler Im Building For CS441
+# Compiler for Rust
 
-# Submission Requirements to get a 100
+A Rust-based compiler construction project for CS441. The repository is organized as a Cargo workspace with separate crates for common compiler data structures, frontend parsing/tokenization, IR, backend lowering, and the command-line interface.
 
-1. Must be able to run this cmd
+## Project Goals
+
+- Parse source programs into structured compiler representations.
+- Convert frontend output into an intermediate representation.
+- Lower IR toward executable-style control flow and runtime behavior.
+- Support required runtime checks for tagged values.
+- Implement and document at least one local optimization pass.
+- Keep the workspace modular enough to test individual compiler stages.
+
+## Workspace Layout
+
+```text
+.
+|-- Cargo.toml
+|-- crates/
+|   |-- compiler-cli/        # Command-line entry point
+|   |-- compiler-common/     # Shared tokens/statements/data types
+|   |-- compiler-frontend/   # Tokenizer and parser
+|   |-- compiler-ir/         # Intermediate representation and printing
+|   `-- compiler-backend/    # Lowering/backend work
+|-- docs/
+|   |-- WORKSPACE_STRUCTURE.md
+|   `-- dev_journal/
+`-- tests/
+```
+
+## Implemented Areas
+
+- Multi-crate Rust workspace
+- Token and statement data structures
+- Frontend tokenizer/parser modules
+- Intermediate representation modules
+- Backend lowering module structure
+- CLI crate for compiler execution
+- Unit tests for tokens, tokenizer behavior, and library components
+
+## Course Requirements Being Targeted
+
+| Requirement | Notes |
+| --- | --- |
+| Source to AST conversion | Parse supported language constructs correctly. |
+| AST to CFG | Preserve runtime behavior in control-flow form. |
+| Runtime tag checks | Detect invalid pointer/integer operations where required. |
+| CFG to SSA | Convert control flow into SSA using phi nodes. |
+| Peephole optimization | Implement a local optimization that can be disabled with `-noopt`. |
+| IR output | Emit the expected `data`, `code`, and `main` sections. |
+| Demonstration scripts | Include examples that show the optimization has an observable effect. |
+
+## Expected Usage
+
+The final compiler is expected to support commands in this shape:
+
 ```bash
 ./comp p.441 > p.ir
 ./comp -noopt p.441 > p.ir
 ```
 
-2. Source to AST conversion
-- Compiler must be able to correctly parse all language constructs
+## Development
 
-3. AST to CFG with correct semantics 
-- CFG must correclty implement runtime behavior
+Run tests with:
 
-4. Tag checks 
-- Must generate runtime checks to prevent:
-    - Dereferencing integers -> fail NotAPointer
-    - Arithmetics on pointers -> fail NotANumber
+```bash
+cargo test
+```
 
-5. CFG to SSA
-- Must convert CFG to SSA form correctly using phi and allowed to used the week-2 ssa inefficient approach
+Build the workspace with:
 
-6. One peephole optimization
-- Either constnat folding or remove tag checks on this 
-- Rules:
-    - Optimizaiton must be local to a basic block
-    - Must be able to disable with -noopt flag
+```bash
+cargo build
+```
 
-7. IR output correctness 
-- Printed ir must match the spec
-- Needs to have:
-    data:
-    code:
-    main:
+## Notes
 
-8. Scripts that demonstrate that my optimizations work
-- Submit:
-    - 2 .441 programs
-    - Optimziation needs to actually be doing something
-
-9. README
-    - Which optimzations i implemented
-    where in teh code it lives
-    any known limiations
+This repository is both a course project and a systems-learning artifact. The goal is to keep the implementation understandable, tested by stage, and documented honestly as compiler features are completed.
